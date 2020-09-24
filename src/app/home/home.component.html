@@ -1,0 +1,74 @@
+
+<app-header></app-header>
+
+<button type="button" class="btn btn-primary" (click)="openEmployeeForm()">Add Employee</button>
+<br/>
+<table class="table">
+    <thead>
+        <tr>
+            <th scope="col">First name</th>
+            <th scope="col">Last name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Created On</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let user of users">
+            <th scope="row">{{user.firstName}}</th>
+            <td>{{user.lastName}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.created | date: "MMMM dd, yyyy hh:mm a" }}</td>
+        </tr>
+    </tbody>
+</table>
+
+
+
+<ng-template #employeeForm>
+    <div class="modal-header">
+        <h4>Add Employee</h4>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="form-div">
+                <div class=" my-5">
+                    <div class="">
+                        <h5 class="card-title text-center">Add User</h5>
+                        <form class="form-signin" [formGroup]="userForm" (submit)="saveUser()">
+                            <div class="form-label-group">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" placeholder="eg: John" autofocus
+                                    formControlName="firstName">
+                            </div>
+                            <div class="form-label-group">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" placeholder="eg: Doe"
+                                    formControlName="lastName">
+                            </div>
+                            <div class="form-label-group">
+                                <label>Username</label>
+                                <input type="email" class="form-control" placeholder="Email address" autofocus
+                                    formControlName="email">
+                            </div>
+
+                            <div class="form-label-group">
+                                <label>Password</label>
+                                <input type="password" class="form-control" placeholder="Password"
+                                    formControlName="password">
+                            </div>
+
+                            <!-- <button class="btn btn-lg btn-primary btn-block text-uppercase" type="submit">Sign
+                                in</button>
+                            <p class="login-error"> {{error}}</p> -->
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="btn-container text-center">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">Cancel</button>
+        <button type="button" class="btn btn-primary" (click)="saveUser()">Save</button>
+    </div>
+</ng-template>
